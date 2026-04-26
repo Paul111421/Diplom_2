@@ -18,13 +18,23 @@ public class UserApi {
                 .post(UserEndpoints.userAuthRegisterEndpoint);
     }
 
+    @Step("Авторизовать пользователя (общий для других метод)(необходимо сначала создать пользователя!!!")
+    public static Response loginUniqueUserAfterCreatingUser(UserCard userCard){
+        return given()
+                .header("Content-Type","application/json")
+                .and()
+                .body(userCard)
+                .when()
+                .post(UserEndpoints.userAuthLoginEndpoint);
+    }
+
     @Step("Извлечь токен авторизации пользователя")
     public static String extractBearerToken(Response responseCreateUniqueUser){
         return responseCreateUniqueUser.then().extract().path("accessToken").toString().replace("Bearer ","");
     }
 
     @Step("Найти нового пользователя")
-    public static Response findUniqueUser(Response responseCreateUniqueUser){
+    public static Response findUniqueUserByToken(Response responseCreateUniqueUser){
         String bearerToken = extractBearerToken(responseCreateUniqueUser);
 
         return given()
@@ -34,7 +44,7 @@ public class UserApi {
     }
 
     @Step("Удалить нового пользователя")
-    public static void deleteUniqueUser(Response responseCreateUniqueUser){
+    public static void deleteUniqueUserByToken(Response responseCreateUniqueUser){
         String bearerToken = extractBearerToken(responseCreateUniqueUser);
 
         Response responseDeleteUniqueUser = given()
@@ -53,5 +63,15 @@ public class UserApi {
     @Step("Проверить появление ошибки создания пользователя (403 Forbidden)")
     public static void createUniqueUser403(Response responseCreateUniqueUser){
         responseCreateUniqueUser.then().statusCode(SC_FORBIDDEN);
+    }
+
+    @Step("Проверить успешность авторизации существующего пользователя (200 ОК)")
+    public static void loginUniqueUser200(Response responseLoginUniqueUser){
+        responseLoginUniqueUser.then().statusCode(SC_OK);
+    }
+
+    @Step("Проверить появление ошибки при передаче неправильных данных для логина (401 Unauthorized)")
+    public static void loginUniqueUser401(Response responseLoginUniqueUser){
+        responseLoginUniqueUser.then().statusCode(SC_UNAUTHORIZED);
     }
 }

@@ -1,4 +1,4 @@
-package user.creation;
+package user.login;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
@@ -10,7 +10,7 @@ import user.UserBaseTest;
 import user.UserCard;
 import user.UserTestValues;
 
-public class CreateUniqueUserTest extends UserBaseTest {
+public class LoginExistingUserTest extends UserBaseTest {
 
     private UserCard validUser;
 
@@ -20,13 +20,13 @@ public class CreateUniqueUserTest extends UserBaseTest {
     }
 
     @Test
-    @DisplayName("Проверка создания пользователя")
-    @Description("Проверить возможность создания нового пользователя в системе при вводе подходящих данных")
-    public void createUniqueUserTest(){
+    @DisplayName("Проверка авторизации пользователя")
+    @Description("Проверить возможность авторизации существующего в системе пользователя при вводе подходящих данных")
+    public void loginExistingUserTest(){
         Response responseCreateUniqueUser = UserApi.createUniqueUser(validUser);
-        UserApi.createUniqueUser200(responseCreateUniqueUser);
+        Response responseLoginUniqueUser = UserApi.loginUniqueUserAfterCreatingUser(validUser);
+        UserApi.loginUniqueUser200(responseLoginUniqueUser);
         UserApi.deleteUniqueUserByToken(responseCreateUniqueUser);
     }
-
 
 }

@@ -10,7 +10,7 @@ import user.UserBaseTest;
 import user.UserCard;
 import user.UserTestValues;
 
-public class CreateExistingUserTest extends UserBaseTest {
+public class CreateExistingUserErrorTest extends UserBaseTest {
     private UserCard validUser;
 
     @Before
@@ -21,10 +21,10 @@ public class CreateExistingUserTest extends UserBaseTest {
     @Test
     @DisplayName("Проверка невозможности создания одинаковых пользователей")
     @Description("Проверить невозможность создания двух пользователя в системе при вводе одних и тех же данных")
-    public void createUniqueUserTest(){
+    public void createExistingUserErrorTest(){
         Response responseCreateUniqueUser = UserApi.createUniqueUser(validUser);
         Response responseCreateSameUniqueUserAgain = UserApi.createUniqueUser(validUser);
         UserApi.createUniqueUser403(responseCreateSameUniqueUserAgain);
-        UserApi.deleteUniqueUser(responseCreateUniqueUser);
+        UserApi.deleteUniqueUserByToken(responseCreateUniqueUser);
     }
 }

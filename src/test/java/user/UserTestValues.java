@@ -15,7 +15,8 @@ public class UserTestValues {
     public static UserCard userValid = new UserCard(email, password, name);
 
     public static UserCard userNotValidDifferentEmail = new UserCard("super_email_777@gmail.ru", password, name);
-    public static UserCard userNotValidDifferentPassword = new UserCard(email, "777", name);
+    public static UserCard userNotValidDifferentPassword = new UserCard(email, "tri_semerki", name);
+    public static UserCard userNotValidDifferentName = new UserCard(email, password, "Hank_J_Wimbleton");
 
     public static UserCard userNotValidEmptyEmail = new UserCard("", password, name);
     public static UserCard userNotValidEmptyPassword = new UserCard(email, "", name);
