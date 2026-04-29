@@ -6,11 +6,10 @@ import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 import user.UserApi;
-import user.UserBaseTest;
 import user.UserCard;
 import user.UserTestValues;
 
-public class CreateExistingUserErrorTest extends UserBaseTest {
+public class CreateExistingUserErrorTest {
     private UserCard validUser;
 
     @Before
@@ -24,7 +23,7 @@ public class CreateExistingUserErrorTest extends UserBaseTest {
     public void createExistingUserErrorTest(){
         Response responseCreateUniqueUser = UserApi.createUniqueUser(validUser);
         Response responseCreateSameUniqueUserAgain = UserApi.createUniqueUser(validUser);
-        UserApi.createUniqueUser403(responseCreateSameUniqueUserAgain);
+        UserApi.createUniqueUser403UserAlreadyExists(responseCreateSameUniqueUserAgain);
         UserApi.deleteUniqueUserByToken(responseCreateUniqueUser);
     }
 }

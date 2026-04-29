@@ -4,13 +4,12 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import order.OrderApi;
-import order.OrderBaseTest;
 import order.OrderCard;
 import order.OrderTestValues;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CreateOrderNoAuthTest extends OrderBaseTest {
+public class CreateOrderNoAuthTest {
 
     private OrderCard validOrder;
 

@@ -6,11 +6,10 @@ import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 import user.UserApi;
-import user.UserBaseTest;
 import user.UserCard;
 import user.UserTestValues;
 
-public class CreateUserNoEmailOrPasTest extends UserBaseTest {
+public class CreateUserNoEmailOrPasTest {
 
     private UserCard noEmailOrPasUser;
 
@@ -24,6 +23,6 @@ public class CreateUserNoEmailOrPasTest extends UserBaseTest {
     @Description("Проверить невозможность создания нового пользователя в системе при отсутствующем поле Имя")
     public void createUserNoEmailOrPasTest(){
         Response responseCreateUniqueUser = UserApi.createUniqueUser(noEmailOrPasUser);
-        UserApi.createUniqueUser403(responseCreateUniqueUser);
+        UserApi.createUniqueUser403EmptyField(responseCreateUniqueUser);
     }
 }

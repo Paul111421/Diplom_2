@@ -6,11 +6,10 @@ import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 import user.UserApi;
-import user.UserBaseTest;
 import user.UserCard;
 import user.UserTestValues;
 
-public class LoginExistingUserTest extends UserBaseTest {
+public class LoginExistingUserTest {
 
     private UserCard validUser;
 

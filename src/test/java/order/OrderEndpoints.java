@@ -1,5 +1,5 @@
 package order;
 
 public class OrderEndpoints {
-    public static String orderCreate = "/api/orders";
+    public static String ORDER_CREATE = "/api/orders";
 }

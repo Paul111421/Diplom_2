@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 import user.UserApi;
-import user.UserBaseTest;
 import user.UserCard;
 import user.UserTestValues;
 
@@ -14,7 +13,7 @@ import user.UserTestValues;
 //Если работать тестером, то только автомазитором :)))
 
 //По требованиям нужны только почта и пароль - от имени логин не зависит. Проверим-с!
-public class LoginNoErrorByWrongNameTest extends UserBaseTest {
+public class LoginNoErrorByWrongNameTest {
 
     private UserCard validUser;
     private UserCard notNameUser;

@@ -6,11 +6,10 @@ import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 import user.UserApi;
-import user.UserBaseTest;
 import user.UserCard;
 import user.UserTestValues;
 
-public class CreateUserEmptyPasswordTest extends UserBaseTest {
+public class CreateUserEmptyPasswordTest {
 
     private UserCard emptyPasswordUser;
 
@@ -24,7 +23,7 @@ public class CreateUserEmptyPasswordTest extends UserBaseTest {
     @Description("Проверить невозможность создания нового пользователя в системе при пустом поле password")
     public void createUserEmptyPasswordTest(){
         Response responseCreateUniqueUser = UserApi.createUniqueUser(emptyPasswordUser);
-        UserApi.createUniqueUser403(responseCreateUniqueUser);
+        UserApi.createUniqueUser403EmptyField(responseCreateUniqueUser);
     }
 
 }
