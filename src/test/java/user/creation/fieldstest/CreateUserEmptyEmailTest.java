@@ -1,6 +1,7 @@
 package user.creation.fieldstest;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.Before;
@@ -9,21 +10,16 @@ import user.UserApi;
 import user.UserCard;
 import user.UserTestValues;
 
-//Создание юзера в Before (без бейзтеста так как на каждый тест почти что различные юзеры)
+//Инициализация юзера в Before (без бейзтеста так как на каждый тест почти что различные юзеры)
 //Суть теста в @Test на проверку получаемой ошибки
 public class CreateUserEmptyEmailTest {
 
     private UserCard emptyEmailUser;
-    private Response responseCreateUniqueUser;
 
     @Before
+    @Step("Инициализация данных пользователя")
     public void initializeUser(){
         emptyEmailUser = UserTestValues.userNotValidEmptyEmail;
-    }
-
-    @Before
-    public void createUserResponseForTest(){
-        responseCreateUniqueUser = UserApi.createUniqueUser(emptyEmailUser);
     }
 
     @Test
@@ -31,6 +27,7 @@ public class CreateUserEmptyEmailTest {
     @Description("Проверить невозможность создания нового пользователя в системе при пустом поле email")
     public void createUserEmptyEmailTest(){
 
+        Response responseCreateUniqueUser = UserApi.createUniqueUser(emptyEmailUser);
         UserApi.createUniqueUser403EmptyField(responseCreateUniqueUser);
 
     }

@@ -21,15 +21,10 @@ public class LoginErrorByWrongPasswordTest {
     private Response responseCreateUniqueUser;
 
     @Before
-    @Step("Инициализация пользовательских данных")
+    @Step("Инициализация пользовательских данных и запись ответов на запросы по созданию профилей пользователей")
     public void initializeUser(){
         validUser = UserTestValues.userValid;
         notValidPasswordUser = UserTestValues.userNotValidDifferentPassword;
-    }
-
-    @Before
-    @Step("Запись ответов на запросы по созданию профилей пользователей")
-    public void createUserResponseForTest(){
         responseCreateUniqueUser = UserApi.createUniqueUser(validUser);
     }
 
@@ -48,6 +43,5 @@ public class LoginErrorByWrongPasswordTest {
     public void deleteUserForTest(){
         UserApi.deleteUniqueUserByToken(responseCreateUniqueUser);
     }
-
 
 }

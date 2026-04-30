@@ -22,15 +22,10 @@ public class LoginNoErrorByWrongNameTest {
     private Response responseCreateUniqueUser;
 
     @Before
-    @Step("Инициализация пользовательских данных")
+    @Step("Инициализация пользовательских данных и запись ответов на запросы по созданию профилей пользователей")
     public void initializeUser(){
         validUser = UserTestValues.userValid;
         notNameUser = UserTestValues.userNotValidDifferentName;
-    }
-
-    @Before
-    @Step("Запись ответов на запросы по созданию профилей пользователей")
-    public void createUserResponseForTest(){
         responseCreateUniqueUser = UserApi.createUniqueUser(validUser);
     }
 
@@ -49,6 +44,5 @@ public class LoginNoErrorByWrongNameTest {
     public void deleteUserForTest(){
         UserApi.deleteUniqueUserByToken(responseCreateUniqueUser);
     }
-
 
 }

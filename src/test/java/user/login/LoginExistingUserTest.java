@@ -20,14 +20,9 @@ public class LoginExistingUserTest {
     private Response responseCreateUniqueUser;
 
     @Before
-    @Step("Инициализация пользовательских данных")
+    @Step("Инициализация пользовательских данных и запись ответов на запросы по созданию профиля пользователя")
     public void initializeUser(){
         validUser = UserTestValues.userValid;
-    }
-
-    @Before
-    @Step("Запись ответов на запросы по созданию профилей пользователей")
-    public void createUserResponseForTest(){
         responseCreateUniqueUser = UserApi.createUniqueUser(validUser);
     }
 

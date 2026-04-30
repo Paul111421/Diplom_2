@@ -1,6 +1,7 @@
 package order.create;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import order.OrderApi;
@@ -20,13 +21,11 @@ public class CreateOrderWithAuthTest {
     private Response responseCreateNewOrder;
 
     @Before
+    @Step("Инициализация данных и создание профиля пользователя")
     public void initializeUserAndOrder(){
         validUser = UserTestValues.userValid;
         validOrder = OrderTestValues.orderValid;
-    }
 
-    @Before
-    public void createUserForTest(){
         responseCreateNewOrder = UserApi.createUniqueUser(validUser);
         UserApi.createUniqueUser200(responseCreateNewOrder);
     }
@@ -43,6 +42,7 @@ public class CreateOrderWithAuthTest {
     }
 
     @After
+    @Step("Удаление нового пользователя")
     public void deleteUserForTest(){
 
         UserApi.deleteUniqueUserByToken(responseCreateNewOrder);

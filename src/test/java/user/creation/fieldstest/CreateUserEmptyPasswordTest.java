@@ -1,6 +1,7 @@
 package user.creation.fieldstest;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.Before;
@@ -9,21 +10,16 @@ import user.UserApi;
 import user.UserCard;
 import user.UserTestValues;
 
-//Создание юзера в Before (без бейзтеста так как на каждый тест почти что различные юзеры)
+//Инициализация юзера в Before (без бейзтеста так как на каждый тест почти что различные юзеры)
 //Суть теста в @Test на проверку получаемой ошибки
 public class CreateUserEmptyPasswordTest {
 
     private UserCard emptyPasswordUser;
-    private Response responseCreateUniqueUser;
 
     @Before
+    @Step("Инициализация данных пользователя")
     public void initializeUser(){
         emptyPasswordUser = UserTestValues.userNotValidEmptyPassword;
-    }
-
-    @Before
-    public void createUserResponseForTest(){
-        responseCreateUniqueUser = UserApi.createUniqueUser(emptyPasswordUser);
     }
 
     @Test
@@ -31,6 +27,7 @@ public class CreateUserEmptyPasswordTest {
     @Description("Проверить невозможность создания нового пользователя в системе при пустом поле password")
     public void createUserEmptyPasswordTest(){
 
+        Response responseCreateUniqueUser = UserApi.createUniqueUser(emptyPasswordUser);
         UserApi.createUniqueUser403EmptyField(responseCreateUniqueUser);
 
     }

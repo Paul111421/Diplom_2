@@ -21,15 +21,10 @@ public class LoginErrorByWrongEmailTest {
     private Response responseCreateUniqueUser;
 
     @Before
-    @Step("Инициализация пользовательских данных")
+    @Step("Инициализация пользовательских данных и запись ответов на запросы по созданию профилей пользователей")
     public void initializeUser(){
         validUser = UserTestValues.userValid;
         notEmailUser = UserTestValues.userNotValidDifferentEmail;
-    }
-
-    @Before
-    @Step("Запись ответов на запросы по созданию профилей пользователей")
-    public void createUserResponseForTest(){
         responseCreateUniqueUser = UserApi.createUniqueUser(validUser);
     }
 
