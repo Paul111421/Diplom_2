@@ -1,8 +1,10 @@
 package user.login.wrongfields;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import user.UserApi;
@@ -17,21 +19,36 @@ public class LoginNoErrorByWrongNameTest {
 
     private UserCard validUser;
     private UserCard notNameUser;
+    private Response responseCreateUniqueUser;
 
     @Before
+    @Step("Инициализация пользовательских данных")
     public void initializeUser(){
         validUser = UserTestValues.userValid;
         notNameUser = UserTestValues.userNotValidDifferentName;
+    }
+
+    @Before
+    @Step("Запись ответов на запросы по созданию профилей пользователей")
+    public void createUserResponseForTest(){
+        responseCreateUniqueUser = UserApi.createUniqueUser(validUser);
     }
 
     @Test
     @DisplayName("Проверка ошибки логина пользователя при неправильном имени")
     @Description("Проверить ошибку авторизации существующего в системе пользователя при вводе неправильного имени")
     public void loginNoErrorByWrongNameTest(){
-        Response responseCreateUniqueUser = UserApi.createUniqueUser(validUser);
+
         Response responseLoginUniqueUser = UserApi.loginUniqueUserAfterCreatingUser(notNameUser);
         UserApi.loginUniqueUser200(responseLoginUniqueUser);
+
+    }
+
+    @After
+    @Step("Удаление из системы созданного профиля пользователя")
+    public void deleteUserForTest(){
         UserApi.deleteUniqueUserByToken(responseCreateUniqueUser);
     }
+
 
 }
